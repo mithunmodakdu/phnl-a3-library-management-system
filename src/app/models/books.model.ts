@@ -3,39 +3,59 @@ import { IBook } from "../interfaces/book.interface";
 
 const bookSchema = new Schema<IBook>(
   {
-    title: {type: String, required: true, trim: true},
-    author: {type: String, required: true, trim: true},
+    title: {
+      type: String,
+      required: [true, "Title is required"],
+      trim: true,
+    },
+    author: {
+      type: String,
+      required: [true, "Author is required"],
+      trim: true,
+    },
     genre: {
       type: String,
       enum: {
-        values: ["FICTION", "NON_FICTION", "SCIENCE", "HISTORY", "BIOGRAPHY", "FANTASY"],
-        message: "Genre must be one of: FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY."
+        values: [
+          "FICTION",
+          "NON_FICTION",
+          "SCIENCE",
+          "HISTORY",
+          "BIOGRAPHY",
+          "FANTASY",
+        ],
+        message:
+          "Genre must be one of: FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY.",
       },
-      required: true,
-      uppercase: true
+      required: [true, "Genre is required"],
+      uppercase: true,
     },
     isbn: {
       type: String,
-      required: true,
-      unique: [true, "This ISBN already exists. Give an unique ISBN"]
+      required: [true, "ISBN is required"],
+      unique: [true, "This ISBN already exists. Give an unique ISBN"],
     },
     description: {
-      type: String
+      type: String,
     },
     copies: {
       type: Number,
-      required: true,
-      min: 0
+      required: [true, "Number of copies is required"],
+      min: [0, "Number of copies cannot be negative"],
+      validate: {
+        validator: Number.isInteger,
+        message: "Number of copies must be an integer",
+      },
     },
     available: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   {
     timestamps: true,
-    versionKey: false
+    versionKey: false,
   }
 );
 
-export const Book = model("Book", bookSchema);
+export const Book = model<IBook>("Book", bookSchema);

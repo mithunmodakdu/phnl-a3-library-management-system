@@ -42,3 +42,16 @@ bookRoutes.get("/", async (req: Request, res: Response) => {
     data: books,
   });
 });
+
+bookRoutes.get("/:bookId", async (req: Request, res: Response) => {
+  const bookId = req.params.bookId;
+  console.log(bookId)
+  const book = await Book.findById(bookId);
+  console.log({book})
+
+  res.status(200).json({
+    success: true,
+    message: "Books retrieved successfully",
+    data: book,
+  });
+});

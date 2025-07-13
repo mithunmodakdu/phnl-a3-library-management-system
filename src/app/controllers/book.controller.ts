@@ -1,7 +1,7 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { NextFunction, Request, Response, Router } from "express";
 import { Book } from "../models/book.model";
 
-export const bookRoutes = express.Router();
+export const bookRoutes: Router = express.Router();
 
 bookRoutes.post(
   "/",
@@ -40,7 +40,7 @@ bookRoutes.get("/", async (req: Request, res: Response) => {
     }
 
     if (books.length === 0) {
-      res.status(404).json({
+      return res.status(404).json({
         success: false,
         message: "Books Not Found",
       });
@@ -51,6 +51,7 @@ bookRoutes.get("/", async (req: Request, res: Response) => {
       message: "Books retrieved successfully",
       data: books,
     });
+
   } catch (error: any) {
     res.status(500).json({
       success: false,

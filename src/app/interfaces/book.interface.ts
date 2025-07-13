@@ -1,4 +1,4 @@
-import { Document, Model } from "mongoose";
+import { Model } from "mongoose";
 
 export interface IBook {
   title: string;
@@ -17,7 +17,7 @@ export interface IBook {
 }
 
 export interface IUpdateAvailabilityMethod {
-  updateAvailability(quantity: number) : Promise<any>
+  updateAvailability(quantity: number) : Promise<boolean>
 }
 
 export interface IBookModel extends Model<IBook, {}, IUpdateAvailabilityMethod>{}

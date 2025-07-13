@@ -1,4 +1,4 @@
-# 📚 Library Management API
+# Library Management API
 
 This Library Management API has been created for managing a library system using **Express**, **TypeScript**, and **MongoDB** (using Mongoose). This system supports CRUD operations for books, borrowing functionality, filtering/sorting, validation, and aggregation for borrow summary.
 
@@ -24,13 +24,13 @@ This Library Management API has been created for managing a library system using
 
 ---
 
-## 📘 API Endpoints
+## API Endpoints
 
 All available API endpoints are described below:
 
 ---
 
-### 📚 Book Endpoints
+### Book Endpoints
 
 - **POST /api/books**  
   We can creates a new book in the library management database. It requires fields like title, author, genre, ISBN, and number of copies. It validates all input fields and returns the created book data if successful.
@@ -49,7 +49,7 @@ All available API endpoints are described below:
 
 ---
 
-### 🔄 Borrow Endpoints
+### Borrow Endpoints
 
 - **POST /api/borrow**  
   It records a borrow action. It checks if the requested number of copies is available, deducts from copies, and sets availability to false if no copies remain. 
